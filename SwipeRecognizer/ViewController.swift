@@ -24,7 +24,45 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        addGestureRecognizers()
+    }
+    
+    func addGestureRecognizers() {
+        var swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeRight.direction = .right
+        swipeView.addGestureRecognizer(swipeRight)
+        
+        var swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeLeft.direction = .left
+        swipeView.addGestureRecognizer(swipeLeft)
+        
+        var swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeUp.direction = .up
+        swipeView.addGestureRecognizer(swipeUp)
+        
+        var swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeDown.direction = .down
+        swipeView.addGestureRecognizer(swipeDown)
+    }
+    
+    @objc func respondToSwipeGesture(gesture: UISwipeGestureRecognizer) {
+        switch gesture.direction {
+        case .right:
+            rightCount += 1
+            rightLabel.text = "RIGHT: \(rightCount)"
+        case .left:
+            leftCount += 1
+            leftLabel.text = "LEFT: \(leftCount)"
+        case .up:
+            upCount += 1
+            upLabel.text = "UP: \(upCount)"
+        case .down:
+            downCount += 1
+            downLabel.text = "DOWN: \(downCount)"
+        default:
+            break
+        }
     }
 
     @IBAction func resetCount(_ sender: Any) {
